@@ -116,6 +116,67 @@ const itemVariants = {
   }
 };
 
+const ProjectCard = ({ project, idx }: any) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: idx * 0.1 }}
+      className="group relative p-10 rounded-[2.5rem] glass border-white/5 hover:border-violet-500/30 transition-all duration-500 overflow-hidden"
+    >
+      {/* Background Glow */}
+      <div className="absolute -inset-px bg-gradient-to-br from-violet-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      
+      <div className="relative z-10 h-full flex flex-col justify-between">
+        <div>
+          <div className="flex justify-between items-start mb-8">
+            <div className="p-4 rounded-2xl bg-violet-500/10 text-violet-400 group-hover:scale-110 group-hover:bg-violet-500/20 transition-all duration-500">
+              {project.icon}
+            </div>
+            <div className="opacity-0 group-hover:opacity-100 transition-all duration-500 translate-x-4 group-hover:translate-x-0">
+              <ArrowUpRight className="text-violet-400" size={24} />
+            </div>
+          </div>
+          
+          <h3 className="text-2xl md:text-3xl font-bold mb-4 group-hover:text-violet-400 transition-colors duration-300">
+            {project.title}
+          </h3>
+          
+          <div className="relative mb-8">
+            <p className={`text-slate-400 text-base leading-relaxed transition-all duration-500 ${isExpanded ? 'line-clamp-none' : 'line-clamp-3 md:group-hover:line-clamp-none'} group-hover:text-slate-300`}>
+              {project.description}
+            </p>
+            <button 
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="mt-2 text-violet-400 text-xs font-mono uppercase tracking-widest hover:text-violet-300 transition-colors md:hidden"
+            >
+              {isExpanded ? 'See Less' : 'See More'}
+            </button>
+            {/* Desktop Hover Hint */}
+            <span className="hidden md:block text-[10px] text-slate-500 font-mono uppercase tracking-widest mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              Hover to expand
+            </span>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap gap-2">
+          {project.tags.map((tag: string, tIdx: number) => (
+            <span 
+              key={tIdx} 
+              className="text-[10px] font-mono uppercase tracking-widest px-4 py-1.5 rounded-full bg-white/5 border border-white/5 text-slate-500 group-hover:text-violet-300 group-hover:border-violet-500/20 group-hover:bg-violet-500/5 transition-all duration-300"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -149,7 +210,7 @@ export default function App() {
             className="font-mono font-bold text-xl tracking-tighter flex items-center gap-2"
           >
             <div className="w-8 h-8 rounded-lg bg-violet-600 flex items-center justify-center text-white text-sm">N</div>
-            NEERAJ<span className="text-violet-500">.DEV</span>
+            NEERAJ<span className="text-violet-500"></span>
           </motion.div>
 
           {/* Desktop Nav */}
@@ -171,7 +232,7 @@ export default function App() {
               <a href="mailto:neerajreddy1850@gmail.com" className="p-2 hover:bg-white/5 rounded-full transition-colors text-slate-400 hover:text-white">
                 <Mail size={18} />
               </a>
-              <a href="https://www.linkedin.com/in/neeraj-silavanuru-803412218/" target="_blank" className="p-2 hover:bg-white/5 rounded-full transition-colors text-slate-400 hover:text-white">
+              <a href="https://linkedin.com" target="_blank" className="p-2 hover:bg-white/5 rounded-full transition-colors text-slate-400 hover:text-white">
                 <Linkedin size={18} />
               </a>
             </div>
@@ -315,49 +376,7 @@ export default function App() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {PROJECTS.map((project, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="group relative p-10 rounded-[2.5rem] glass border-white/5 hover:border-violet-500/30 transition-all duration-500 overflow-hidden"
-                >
-                  {/* Background Glow */}
-                  <div className="absolute -inset-px bg-gradient-to-br from-violet-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
-                  <div className="relative z-10 h-full flex flex-col justify-between">
-                    <div>
-                      <div className="flex justify-between items-start mb-8">
-                        <div className="p-4 rounded-2xl bg-violet-500/10 text-violet-400 group-hover:scale-110 group-hover:bg-violet-500/20 transition-all duration-500">
-                          {project.icon}
-                        </div>
-                        <div className="opacity-0 group-hover:opacity-100 transition-all duration-500 translate-x-4 group-hover:translate-x-0">
-                          <ArrowUpRight className="text-violet-400" size={24} />
-                        </div>
-                      </div>
-                      
-                      <h3 className="text-2xl md:text-3xl font-bold mb-4 group-hover:text-violet-400 transition-colors duration-300">
-                        {project.title}
-                      </h3>
-                      
-                      <p className="text-slate-400 text-base leading-relaxed mb-8 line-clamp-3 group-hover:text-slate-300 transition-colors duration-300">
-                        {project.description}
-                      </p>
-                    </div>
-
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag, tIdx) => (
-                        <span 
-                          key={tIdx} 
-                          className="text-[10px] font-mono uppercase tracking-widest px-4 py-1.5 rounded-full bg-white/5 border border-white/5 text-slate-500 group-hover:text-violet-300 group-hover:border-violet-500/20 group-hover:bg-violet-500/5 transition-all duration-300"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
+                <ProjectCard key={idx} project={project} idx={idx} />
               ))}
             </div>
           </div>
@@ -535,14 +554,14 @@ export default function App() {
         <footer className="py-12 px-6 border-t border-white/5">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="font-mono font-bold text-lg tracking-tighter">
-              NEERAJ<span className="text-violet-500">.DEV</span>
+              NEERAJ<span className="text-violet-500"></span>
             </div>
             <div className="text-slate-600 text-[10px] font-mono uppercase tracking-[0.2em]">
               Designed & Engineered with precision © 2026
             </div>
             <div className="flex gap-6">
-              <a href="https://github.com/Neeraj1850/" className="text-slate-500 hover:text-violet-400 transition-colors"><Github size={20} /></a>
-              <a href="https://www.linkedin.com/in/neeraj-silavanuru-803412218/" className="text-slate-500 hover:text-violet-400 transition-colors"><Linkedin size={20} /></a>
+              <a href="#" className="text-slate-500 hover:text-violet-400 transition-colors"><Github size={20} /></a>
+              <a href="#" className="text-slate-500 hover:text-violet-400 transition-colors"><Linkedin size={20} /></a>
               <a href="mailto:neerajreddy1850@gmail.com" className="text-slate-500 hover:text-violet-400 transition-colors"><Mail size={20} /></a>
             </div>
           </div>
