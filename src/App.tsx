@@ -171,7 +171,7 @@ export default function App() {
               <a href="mailto:neerajreddy1850@gmail.com" className="p-2 hover:bg-white/5 rounded-full transition-colors text-slate-400 hover:text-white">
                 <Mail size={18} />
               </a>
-              <a href="https://linkedin.com" target="_blank" className="p-2 hover:bg-white/5 rounded-full transition-colors text-slate-400 hover:text-white">
+              <a href="https://www.linkedin.com/in/neeraj-silavanuru-803412218/" target="_blank" className="p-2 hover:bg-white/5 rounded-full transition-colors text-slate-400 hover:text-white">
                 <Linkedin size={18} />
               </a>
             </div>
@@ -541,8 +541,8 @@ export default function App() {
               Designed & Engineered with precision © 2026
             </div>
             <div className="flex gap-6">
-              <a href="#" className="text-slate-500 hover:text-violet-400 transition-colors"><Github size={20} /></a>
-              <a href="#" className="text-slate-500 hover:text-violet-400 transition-colors"><Linkedin size={20} /></a>
+              <a href="https://github.com/Neeraj1850/" className="text-slate-500 hover:text-violet-400 transition-colors"><Github size={20} /></a>
+              <a href="https://www.linkedin.com/in/neeraj-silavanuru-803412218/" className="text-slate-500 hover:text-violet-400 transition-colors"><Linkedin size={20} /></a>
               <a href="mailto:neerajreddy1850@gmail.com" className="text-slate-500 hover:text-violet-400 transition-colors"><Mail size={20} /></a>
             </div>
           </div>
